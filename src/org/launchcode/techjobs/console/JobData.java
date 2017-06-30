@@ -7,6 +7,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,8 @@ public class JobData {
     private static final String DATA_FILE = "resources/job_data.csv";
     private static Boolean isDataLoaded = false;
 
-    private static ArrayList<HashMap<String, String>> allJobs;
+    public static ArrayList<HashMap<String, String>> allJobs;
+    public static ArrayList<HashMap<String,String>> foundJobs;
 
     /**
      * Fetch list of all values from loaded data,
@@ -62,7 +64,7 @@ public class JobData {
      * with "Enterprise Holdings, Inc".
      *
      * @param column   Column that should be searched.
-     * @param value Value of teh field to search for
+     * @param value Value of the field to search for
      * @return List of all jobs matching the criteria
      */
     public static ArrayList<HashMap<String, String>> findByColumnAndValue(String column, String value) {
@@ -76,14 +78,42 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
 
         return jobs;
     }
+         public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
+            loadData();
+
+            ArrayList <HashMap<String, String>> foundJobs = new ArrayList<>();
+
+             for (HashMap<String, String> item : allJobs) {
+
+                 for (String itemValue : item.values()) {
+
+                     if (itemValue.toLowerCase().contains(value.toLowerCase())) {
+
+                         foundJobs.add(item);
+
+                         break;
+
+
+                     }
+                 }
+             }         return foundJobs;
+         }
+
+    // loop through all jobs, and for each job loop through hashmap -- for each column, check for a match -- if found, move on
+    //       jobs.add(row)
+    //
+    //       if (aValue.contains(value)) {
+    //            jobs.add(row);
+    //        } break statement to avoid duplicates
+    //  }
     /**
      * Read in data from a CSV file and store it in a list
      */
