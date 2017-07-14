@@ -42,6 +42,7 @@ public class TechJobs {
                     printJobs(JobData.findAll());
                 } else {
 
+                    //display results
                     ArrayList<String> results = JobData.findAll(columnChoice);
 
                     System.out.println("\n*** All " + columnChoices.get(columnChoice) + " Values ***");
@@ -97,10 +98,12 @@ public class TechJobs {
                 System.out.println("" + j + " - " + choices.get(choiceKeys[j]));
             }
 
+            //index input
             choiceIdx = in.nextInt();
             in.nextLine();
 
             // Validate user's input
+            // Must be greater than 0
             if (choiceIdx < 0 || choiceIdx >= choiceKeys.length) {
                 System.out.println("Invalid choice. Try again.");
             } else {
@@ -114,6 +117,8 @@ public class TechJobs {
 
     // Print a list of jobs
     public static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+
+        //display list of jobs with "**" separation
 
         for (HashMap<String, String> eachMap : someJobs) {
             System.out.println("**********");
