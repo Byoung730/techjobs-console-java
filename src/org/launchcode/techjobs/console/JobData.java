@@ -87,9 +87,9 @@ public class JobData {
     }
          public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
-            loadData();
+             loadData();
 
-            ArrayList <HashMap<String, String>> foundJobs = new ArrayList<>();
+             ArrayList<HashMap<String, String>> foundJobs = new ArrayList<>();
 
              for (HashMap<String, String> item : allJobs) {
 
@@ -101,12 +101,11 @@ public class JobData {
 
                          break;
 
-
                      }
                  }
-             }         return foundJobs;
+             }
+             return foundJobs;
          }
-
     // loop through all jobs, and for each job loop through hashmap -- for each column, check for a match -- if found, move on
     //       jobs.add(row)
     //
